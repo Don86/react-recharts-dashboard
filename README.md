@@ -7,7 +7,12 @@ A project that saw a stupid number of iterations with different libraries: D3.js
 * axios
 * lodash
 
-Might use `Material UI` to make things pretty. 
+Might use `Material UI` to make things pretty.
+
+## Serving
+
+* Not served yet, planning to put up on Github pages
+* Git clone and serve locally with `npm start`
 
 ## Tech Notes
 

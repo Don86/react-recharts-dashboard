@@ -63,6 +63,12 @@
   min-width: 150px;
 }
 
+#form2 {
+  width: 150px;
+  max-width:150px;
+  min-width: 150px;
+}
+
 .barChart {
   border-radius: 10px;
   background-color:white;

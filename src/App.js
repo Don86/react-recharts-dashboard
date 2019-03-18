@@ -207,11 +207,15 @@ class App extends Component {
       <div>
         <div className="h1">Stock Index</div>
         <div className="container">
-          <form className="SearchBar_Form">
-            <input className="SearchBar_Input"
+          <form id="form2" className="SearchBar_Form card">
+            <input className="input"
                   value={ this.state.ticker0 }
                   onChange={ this.handleStockChange } />
-            <button className="SearchBar_Button" onClick={ this.handleStockSubmit }>search</button>
+            <br />
+            <button className="inputBtn" 
+                    onClick={ this.handleStockSubmit }>
+                    Submit
+            </button>
           </form>
 
           <LineChart className="card"
