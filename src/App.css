@@ -1,33 +1,152 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,700|Roboto:300,400,500);
+
 .App {
-  text-align: center;
+  text-align: left;
+  font-family: "Roboto";
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.body {
+  background-color: #DEE7EE;
+  color: #454545;
+  height: 100%;
+  width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.h1 {
+  padding-left: 10px;
+  font-family: "Nunito";
+  font-weight: 700;
+  background-color: #DEE7EE;
+  font-size: 32px;
+}
+
+.topbar {
+  position: sticky;
+  z-index:1000;
+  top: 0;
+  font-family: 'Roboto';
+  height: 80px;
+  background-color: #283442;
   color: white;
+  padding-left: 20px;
+  text-align: center;
+  font-size: 25px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.input {
+  border: 2px solid #2555DC;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  width: 120px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.input:focus {
+  background-color: lightblue;
+}
+
+.container {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  background-color: #DEE7EE;
+  /*flex-wrap: nowrap;*/
+}
+
+#form1 {
+  width: 150px;
+  max-width:150px;
+  min-width: 150px;
+}
+
+.barChart {
+  border-radius: 10px;
+  background-color:white;
+  padding: 10px 0 0 10px;
+  height: 350px;
+  margin: 8px 20px;
+}
+
+/* -------------------- table stuff -------------------- */
+.fixed_header{
+  width: 200px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.fixed_header tbody {
+  display:block;
+  width: 100%;
+  overflow: auto;
+  height: 200px;  
+  background-color: #E8ECEF;
+}
+
+.fixed_header th tr {
+  display: block;
+}
+
+.fixed_header th {
+  background: black;
+  color:#fff;
+}
+
+.fixed_header th, .fixed_header td {
+  padding: 5px;
+  text-align: left;
+  width: 200px;
+}
+/* ---------------------------------------- */
+
+.inputBtn {
+  border-radius: 7px;
+  background-color: #4E5B6D;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  transition-duration: 0.5s;
+  cursor: pointer;
+  font-family: "Nunito";
+  font-weight: 700;
+}
+
+.inputBtn:hover {
+  background-color: #f44336;
+}
+
+#form2 {
+  width: 150px;
+}
+
+.form3 {
+  width: 250px;
+}
+
+.card {
+  border-radius: 10px;
+  background-color:white;
+  padding: 10px 0 0 10px;
+  height: 350px;
+  margin: 12px 16px;
+  box-shadow: 2px 2px 1px #69738E;
+}
+.textMed {
+  font-size: 20px;
+  font-family: "Nunito";
+  font-weight: 700;
+}
+.textSmall {
+  font-size: 14px;
+  font-family: "Nunito";
+  color: grey;
 }
