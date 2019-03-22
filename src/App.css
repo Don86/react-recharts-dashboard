@@ -156,3 +156,8 @@
   font-family: "Nunito";
   color: grey;
 }
+
+.recharts-cartesian-axis-tick {    
+  font-size: 0.6rem;
+  font-family: Roboto, sans-serif;
+}

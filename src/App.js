@@ -3,34 +3,16 @@ import './App.css';
 import {
   LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, Legend,
 } from 'recharts';
-import _ from 'lodash';
+//import _ from 'lodash';
 import axios from 'axios';
 
 import calcBarChart from "./components/calcBarChart"
 import TableRow from "./components/TableRow"
-import TopBar from "./components/TopBar"
+//import TopBar from "./components/TopBar"
+//import standardDeviation from "./components/standardDeviation"
+import calcStockReturns from "./components/calcStockReturns"
+import parseData from "./components/parseData"
 
-function parseData(myInput) {
-  // processes alpha vantage data into a format for viz
-  // 1. Convert object of objects into array of objects
-  // create new key: date (originally a key in the first level of objects)
-  let newArray = []
-  for (var key in myInput) {
-      if (myInput.hasOwnProperty(key)) {
-          const newRow = Object.assign({"newDate": new Date(key)}, {"Date": key}, myInput[key])
-          newArray.push(newRow)
-      }
-  }
-  //console.log(newArray)
-  // 2. Generate plotData for d3js
-  let newArray2 = []
-  for (var i = 0; i < newArray.length; i++) {
-    let newRow = Object.assign({"date": newArray[i]["Date"]}, {"a":parseFloat(newArray[i]["4. close"])})
-    newArray2.unshift(newRow)
-  }
-
-  return newArray2
-}
 
 class App extends Component {
   constructor() {
@@ -51,13 +33,13 @@ class App extends Component {
       ],
       ticker0:"",
       ticker1:"",
-      lineData: [{date: 'Page A', a: 4000},
-      {date: 'Page B', a: 3000},
-      {date: 'Page C', a: 2000},
-      {date: 'Page D', a: 2780},
-      {date: 'Page E', a: 1890},
-      {date: 'Page F', a: 2390},
-      {date: 'Page G', a: 3490},]
+      lineData: [{date: '1', a: 0},
+                {date: '2', a: 0},
+                {date: '3', a: 0},
+                {date: '4', a: 0},
+                {date: '5', a: 0},
+                {date: '6', a: 0}],
+      returnsObj: {"avg_return": 0, "sd": 0, "N": 0}
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -119,14 +101,15 @@ class App extends Component {
 
     axios.get(url)
     .then(response => {
-      console.log(response.data);
-      //let stocks = _.flattenDeep( Array.from(res.data['Stock Quotes']).map((stock) => [{symbol: stock['1. symbol'], price: stock['2. price'], volume: stock['3. volume'], timestamp: stock['4. timestamp']}]) );
+      //console.log(response.data);
       let lineData = parseData(response.data["Monthly Time Series"]);
-      console.log(lineData);
+      let returnsObj = calcStockReturns(lineData)
+      console.log(returnsObj);
       this.setState((state, props) => {
         return {
           ...state,
-          lineData
+          lineData,
+          returnsObj
         }
       })
     })
@@ -148,11 +131,10 @@ class App extends Component {
       interestArray.push(+this.state.barData[i].interest)
       totalInterest += +this.state.barData[i].interest
     }
+    totalInterest = parseFloat(totalInterest.toFixed(2))
 
     return (
       <div>
-        <TopBar />
-
         <div className="h1">Compound Interest Calculator</div>
       <div className="container">
         <form id="form1" className="card" onSubmit={this.handleSubmit}>
@@ -207,8 +189,9 @@ class App extends Component {
       <div>
         <div className="h1">Stock Index</div>
         <div className="container">
-          <form id="form2" className="SearchBar_Form card">
+          <form id="form2" className="card">
             <input className="input"
+                  placeholder="stock symbol"
                   value={ this.state.ticker0 }
                   onChange={ this.handleStockChange } />
             <br />
@@ -230,6 +213,14 @@ class App extends Component {
             <Legend />
             <Line type="monotone" dataKey="a" stroke="#8884d8" activeDot={{ r: 3 }} />
           </LineChart>
+
+          <div className="card form3">
+            <div className="textMed">Average 1-yr Return</div>
+            <div className="textSmall">{parseFloat(this.state.returnsObj.avg_return.toFixed(5))}</div>
+            <br />
+            <div className="textMed">Standard Deviation</div>
+            <div className="textSmall">{parseFloat(this.state.returnsObj.sd.toFixed(5))}</div>
+        </div>
         </div>
       </div>
       </div>
